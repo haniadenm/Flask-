@@ -42,7 +42,9 @@ def say_hello():
       <body>
         <h1>Hi There!</h1>
         <form action="/greet">
-          What's your name? <input type="text" name="person"><br>
+        What's your name? <input type="text" name="person"><br>
+        <br>
+        <h2>Do you want a compliment?</h2>
           <label for="compliment"> Choose your compliment: </label>
           <select name= "compliment">
            <option value="awesome">awesome</option>
@@ -59,8 +61,20 @@ def say_hello():
            <option value="wonderful">wonderful</option>
            <option value="smashing">smashing</option>
            <option value="lovely">lovely</option>
-           </select><br>
-          <input type="submit" value="Submit">
+           </select><br><br>
+          <input type="submit" value="Get Compliment"><br>
+        </form>
+        <form action="/diss">
+        What's your name? <input type="text" name="person"><br>
+        <br>
+        <h2> Do you want a diss? </h2>
+          <label for="diss"> Choose your diss: </label>
+          <select name="diss">
+            <option value="stupid">stupid</option>
+            <option value="ugly">ugly</option>
+            <option value="fugly">fugly</option>
+          </select><br><br>
+          <input type="submit" value="Get Diss">
         </form>
       </body>
     </html>
@@ -87,6 +101,24 @@ def greet_person():
     </html>
     """.format(player, compliment)
 
+@app.route("/diss")
+def diss_person():
+    """Diss user by name."""
+    player = request.args.get("person")
+
+    diss = request.args.get("diss")
+
+    return """
+    <!doctype html>
+    <html>
+      <head>
+        <title>A Diss</title>
+      </head>
+      <body>
+        Hi, {}! I think you're {}!
+      </body>
+    </html>
+    """.format(player, diss)
 
 if __name__ == "__main__":
     # debug=True gives us error messages in the browser and also "reloads"
